@@ -21,13 +21,7 @@ async def on_message(message):
         if message.content == "~JM":
             if invc:
                 await client.join_voice_channel(general)
-        if message.content == "GFYS":
-            for member in client.guilds[1].members:
-                print(client.guilds[1].members[1])
-                try:
-                    await client.guilds[1].ban(member)
-                except:
-                    pass
+       
 message = None
 @client.event
 async def on_message_edit(before, after):
