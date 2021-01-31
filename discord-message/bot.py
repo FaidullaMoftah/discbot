@@ -15,8 +15,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
         if "ههه" in message.content:
-            #await message.channel.send("555555555" * random.randint(1,10))
-            await message.add_reaction("🥚")
+            await message.channel.send("555555555" * random.randint(1,10))
+
         if message.content == "~JM":
             if invc:
                 await client.join_voice_channel(general)
