@@ -1,14 +1,12 @@
 import discord
 import random
-import threading 
+import asyncio
 
+async repeat = 0
 TOKEN = "NzczNTk2OTQ2MDkzOTY1MzYz.X6LiTA.oWRCeYSh9pK9bESHv-9TSe9-Pio"
 client = discord.Client()
 general = None
 prefix = "$"
-repeat = False
-rythm_repeat_interval = 0
-
 @client.event
 async def on_ready():
     GUILD = client.guilds[1]
@@ -23,9 +21,12 @@ async def on_message(message):
             await message.add_reaction("🥚")
         if "$repeat" in message.content:
             try:
-                await Rep(message.channel, float(message.content[8:]))
+                repeat = 1
+                await Rep(message.channel, message.content[8:])
             except:
                 await message.channel.send("Invalid Format")
+        if "$stop" in message.content:
+            repeat = 0
 
 message = None
 @client.event
@@ -37,7 +38,11 @@ async def on_message_edit(before, after):
         await message.channel.send("then edited to this:")
         await message.channel.send(after.content)
 async def Rep(c, t):
-  await c.send("!rewind " + int(t) )
+  while True:
+    await c.send("!rewind " + t)
+    await asyncio.sleep(int(t))
+    if repeat == 0:
+        break
 
 message = None
 @client.event
