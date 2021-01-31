@@ -23,7 +23,7 @@ async def on_message(message):
             await message.add_reaction("🥚")
         if "$repeat" in message.content:
             try:
-                Rep(message.channel, float(message.content[8:]))
+                await Rep(message.channel, float(message.content[8:]))
             except:
                 await message.channel.send("Invalid Format")
 
@@ -37,7 +37,6 @@ async def on_message_edit(before, after):
         await message.channel.send("then edited to this:")
         await message.channel.send(after.content)
 async def Rep(c, t):
-  threading.Timer(t, Rep).start()
   await c.send("!rewind " + int(t) )
 
 message = None
