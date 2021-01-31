@@ -1,10 +1,14 @@
 import discord
 import random
+import threading 
 
-TOKEN = "NzczNTk2OTQ2MDkzOTY1MzYz.X6LiTA.NlWXSKLyhFyGq1ZdBq9NhA7ZQWM"
+TOKEN = "NzczNTk2OTQ2MDkzOTY1MzYz.X6LiTA.oWRCeYSh9pK9bESHv-9TSe9-Pio"
 client = discord.Client()
-invc = True
 general = None
+prefix = "$"
+repeat = False
+rythm_repeat_interval = 0
+
 @client.event
 async def on_ready():
     GUILD = client.guilds[1]
@@ -16,12 +20,13 @@ async def on_ready():
 @client.event
 async def on_message(message):
         if "ههه" in message.content:
-            #await message.channel.send("555555555" * random.randint(1,10))
             await message.add_reaction("🥚")
-        if message.content == "~JM":
-            if invc:
-                await client.join_voice_channel(general)
-       
+        if message.content == "$repeat":
+            try:
+                Rep(message.channel, float(message.content[8:]))
+            except:
+                message.channel.send("Invalid Format")
+
 message = None
 @client.event
 async def on_message_edit(before, after):
@@ -31,7 +36,9 @@ async def on_message_edit(before, after):
         await message.channel.send(before.content)
         await message.channel.send("then edited to this:")
         await message.channel.send(after.content)
-
+def Rep(c, t):
+  threading.Timer(t, Rep).start()
+  c.send("!rewind " +int(t))
 
 message = None
 @client.event
@@ -39,3 +46,4 @@ async def on_message_delete(message):
     await message.channel.send(message.author.name + " Sent this then deleted:")
     await message.channel.send(message.content)
 client.run(TOKEN)
+i
