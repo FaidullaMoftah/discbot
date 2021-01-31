@@ -36,7 +36,7 @@ async def on_message_edit(before, after):
         await message.channel.send(before.content)
         await message.channel.send("then edited to this:")
         await message.channel.send(after.content)
-def Rep(c, t):
+async def Rep(c, t):
   threading.Timer(t, Rep).start()
   await c.send("!rewind " + int(t) )
 
