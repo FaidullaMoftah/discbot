@@ -21,11 +21,11 @@ async def on_ready():
 async def on_message(message):
         if "ههه" in message.content:
             await message.add_reaction("🥚")
-        if message.content == "$repeat":
+        if "$repeat" in message.content:
             try:
                 Rep(message.channel, float(message.content[8:]))
             except:
-                message.channel.send("Invalid Format")
+                await message.channel.send("Invalid Format")
 
 message = None
 @client.event
@@ -38,7 +38,7 @@ async def on_message_edit(before, after):
         await message.channel.send(after.content)
 def Rep(c, t):
   threading.Timer(t, Rep).start()
-  c.send("!rewind " +int(t))
+  await c.send("!rewind " + int(t) )
 
 message = None
 @client.event
@@ -46,4 +46,4 @@ async def on_message_delete(message):
     await message.channel.send(message.author.name + " Sent this then deleted:")
     await message.channel.send(message.content)
 client.run(TOKEN)
-i
+
