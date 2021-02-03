@@ -1,8 +1,7 @@
 import discord
 import random
 import asyncio
-
-async repeat = 0
+repeat = 0
 TOKEN = "NzczNTk2OTQ2MDkzOTY1MzYz.X6LiTA.oWRCeYSh9pK9bESHv-9TSe9-Pio"
 client = discord.Client()
 general = None
@@ -17,14 +16,17 @@ async def on_ready():
     )
 @client.event
 async def on_message(message):
+    
         if "ههه" in message.content:
             await message.add_reaction("🥚")
         if "$repeat" in message.content:
-            try:
+            try:                
                 repeat = 1
-                await Rep(message.channel, message.content[8:])
+                await Rep(message.channel, message.content[7:9], message.content[9:11])
             except:
                 await message.channel.send("Invalid Format")
+                await message.channel.send(message.content[7:9])
+                await message.channel.send(message.content[9:11])
         if "$stop" in message.content:
             repeat = 0
 
@@ -37,13 +39,10 @@ async def on_message_edit(before, after):
         await message.channel.send(before.content)
         await message.channel.send("then edited to this:")
         await message.channel.send(after.content)
-async def Rep(c, t):
-  while True:
+async def Rep(c, t, times):
+  for i in range(int(times)):
     await c.send("!rewind " + t)
     await asyncio.sleep(int(t))
-    if repeat == 0:
-        break
-
 message = None
 @client.event
 async def on_message_delete(message):
