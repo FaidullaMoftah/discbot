@@ -41,7 +41,7 @@ async def on_message_edit(before, after):
         await message.channel.send(after.content)
 async def Rep(c, t, times):
   for i in range(int(times)):
-    await c.send("!rewind " + t)
+    await c.send(";;rewind " + t)
     await asyncio.sleep(int(t))
 message = None
 @client.event
