@@ -1,6 +1,11 @@
+import sys
+sys.path.insert(0, '/videos/')
+from videos import video
 import discord
 import random
 import asyncio
+
+
 repeat = 0
 TOKEN = "NzczNTk2OTQ2MDkzOTY1MzYz.X6LiTA.oWRCeYSh9pK9bESHv-9TSe9-Pio"
 client = discord.Client()
