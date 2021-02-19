@@ -13,7 +13,7 @@ scopes = ["https://www.googleapis.com/auth/youtube",
           "https://www.googleapis.com/auth/youtube.force-ssl",
           "https://www.googleapis.com/auth/youtube.readonly",
           "https://www.googleapis.com/auth/youtubepartner"]
-def main():
+def getVideo():
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
     api_service_name = "youtube"
     api_version = "v3"
@@ -32,16 +32,19 @@ def main():
             pickle.dump(creds, token)
     youtube = googleapiclient.discovery.build(
         api_service_name, api_version, credentials=creds)
+    results = 10
     while True:
         query = input("Query: ")
         request = youtube.search().list(
             part="snippet",
+            type = "video",
             channelType="any",
-            maxResults=5,
+            maxResults=results,
             order="relevance",
             q=query,
-            prettyPrint=True
+            prettyPrint=True,
         )
         response = request.execute()
-        print(response)
-main()
+        for i in range(results):
+                print(response["items"][i])
+        return None
