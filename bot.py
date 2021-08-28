@@ -8,7 +8,6 @@ import random
 import asyncio
 
 repeat = 0
-TOKEN = "NzczNTk2OTQ2MDkzOTY1MzYz.X6LiTA.oWRCeYSh9pK9bESHv-9TSe9-Pio"
 client = discord.Client()
 vc = None
 voice_client = None
@@ -25,8 +24,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
         global voice_client
-        if "ههه" in message.content:
-            await message.add_reaction("🥚")
         if "$summon" in message.content:
             voice_client = await vc.connect()
             source = await discord.FFmpegOpusAudio.from_probe("p.webm")
